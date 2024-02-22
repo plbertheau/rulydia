@@ -1,12 +1,12 @@
-# Random User Lydia : rulydia
+## Random User Lydia : rulydia
 
-Test project for Lydia :
+## Test project for Lydia :
 
 - Fetches the list of user data in pages from a public random user API
 - Caches the fetched data in local database using Room
 - Uses the latest Paging library components to handle pagination
 
-The modules are as follow:
+## The modules are as follow:
 It uses clean architecture (app → domain ← data)
 
 * app: Presentation Layer
