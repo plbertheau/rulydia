@@ -1,0 +1,75 @@
+plugins {
+    id "dagger.hilt.android.plugin"
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+    id "com.google.devtools.ksp"
+}
+
+android {
+    namespace = "com.plbertheau.data"
+    compileSdk = 34
+
+    defaultConfig {
+        minSdk = 27
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    testOptions {
+        unitTests.includeAndroidResources = true
+        unitTests.returnDefaultValues = true
+
+    }
+    buildTypes {
+        debug {
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+
+dependencies {
+
+    // RETROFIT
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+
+    // PAGING
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+    implementation "androidx.paging:paging-compose:$paging_version"
+
+    // HILT
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation 'com.google.ar:core:1.41.0'
+
+    ksp "com.google.dagger:hilt-compiler:$hilt_version"
+    implementation "androidx.hilt:hilt-navigation-compose:1.1.0"
+    implementation "androidx.hilt:hilt-work:1.1.0"
+
+    implementation "androidx.work:work-runtime-ktx:2.9.0"
+
+    // ROOM
+    implementation "androidx.room:room-ktx:$room_version"
+    ksp "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-paging:$room_version"
+
+    implementation project(':domain')
+
+    // DEPENDENCY FOR TESTING
+    testImplementation 'junit:junit:4.13.2'
+
+    androidTestImplementation 'org.mockito.kotlin:mockito-kotlin:5.1.0'
+    androidTestImplementation 'androidx.arch.core:core-testing:2.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito-inline-extended:2.28.1"
+}
